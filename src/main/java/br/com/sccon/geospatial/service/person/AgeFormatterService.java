@@ -9,9 +9,10 @@ import java.util.Optional;
 
 @Service
 public class AgeFormatterService {
-    public Optional<Long> format(LocalDate birthDate, String output) throws Exception {
+
+    public Optional<Long> format(LocalDate birthDate, String output) throws IllegalArgumentException {
         if(!StringUtils.hasText(output)){
-            throw new Exception();
+            throw new IllegalArgumentException("Output cannot be empty");
         }
         switch (output) {
             case "days":
@@ -21,7 +22,8 @@ public class AgeFormatterService {
             case "years":
                 return Optional.of(ChronoUnit.YEARS.between(birthDate, LocalDate.now()));
             default:
-                throw new Exception();
+                throw new IllegalArgumentException("Invalid output: " + output);
         }
     }
+
 }

@@ -1,7 +1,5 @@
 package br.com.sccon.geospatial.service.person;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
@@ -18,7 +16,7 @@ public class SalaryCalculatorService {
 
     public BigDecimal getSalary(LocalDate admissionDate, String output) throws Exception {
         if(!StringUtils.hasText(output)){
-            throw new Exception();
+            throw new IllegalArgumentException("Output cannot be empty");
         }
 
         BigDecimal calculatedSalary = getSalaryFromAdmissionDate(admissionDate);
@@ -31,7 +29,7 @@ public class SalaryCalculatorService {
                         .divide(minWage, RoundingMode.CEILING)
                         .setScale(2, RoundingMode.CEILING);
             default:
-                throw new Exception();
+                throw new IllegalArgumentException("Invalid output: " + output);
         }
     }
 

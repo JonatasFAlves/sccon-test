@@ -34,7 +34,7 @@ public class PersonController {
     @PostMapping()
     public ResponseEntity<PersonDTO> save(@RequestBody @Valid PersonDTO personDTO) {
         Optional<PersonDTO> optionalPersonDTO = personService.save(personDTO);
-        //todo: better conflict handling
+        //todo: add better conflict handling
         if(optionalPersonDTO.isEmpty()){
             return ResponseEntity.status(HttpStatus.CONFLICT).build();
         }
@@ -48,7 +48,7 @@ public class PersonController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity update(@RequestBody PersonDTO personDTO, @PathVariable("id") String id){
+    public ResponseEntity update(@RequestBody @Valid  PersonDTO personDTO, @PathVariable("id") String id){
         personDTO.setId(Long.valueOf(id));
         Optional<PersonDTO> updatedPerson = personService.update(personDTO);
         if(updatedPerson.isEmpty()){
@@ -58,7 +58,7 @@ public class PersonController {
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity updateAttribute(@RequestBody PersonDTO personDTO, @PathVariable("id") String id){
+    public ResponseEntity updateAttribute(@RequestBody @Valid PersonDTO personDTO, @PathVariable("id") String id){
         personDTO.setId(Long.valueOf(id));
         Optional<PersonDTO> updatedPerson = personService.update(personDTO);
         if(updatedPerson.isEmpty()){
@@ -76,7 +76,6 @@ public class PersonController {
         return person.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    //todo: add unit and integration tests for this usecase
     @GetMapping("/{id}/age")
     public ResponseEntity<Long> getAgeById(@PathVariable("id") String id, @RequestParam("output") String output){
         Optional<PersonDTO> person = personService.findById(Long.valueOf(id));
@@ -86,12 +85,11 @@ public class PersonController {
         try {
             Optional<Long> age = ageFormatterService.format(person.get().getBirthDate(), output);
             return age.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.badRequest().build());
-        } catch (Exception e) {
+        } catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().build();
         }
     }
 
-    //todo: add unit and integration tests for this usecase
     @GetMapping("/{id}/salary")
     public ResponseEntity<BigDecimal> getSalary(@PathVariable("id") String id, @RequestParam("output") String output){
         Optional<PersonDTO> person = personService.findById(Long.valueOf(id));
