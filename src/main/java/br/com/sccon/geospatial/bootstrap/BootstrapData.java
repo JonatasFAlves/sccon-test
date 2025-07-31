@@ -7,14 +7,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
-import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Arrays;
 
 @Component
 public class BootstrapData implements CommandLineRunner {
 
-    Logger logger = LoggerFactory.getLogger(BootstrapData.class);
+    private final Logger logger = LoggerFactory.getLogger(BootstrapData.class);
     private final PersonRepository personRepository;
 
     public BootstrapData(PersonRepository personRepository) {

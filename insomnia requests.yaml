@@ -1,0 +1,230 @@
+type: collection.insomnia.rest/5.0
+name: Scratch Pad
+meta:
+  id: wrk_scratchpad
+  created: 1753925498240
+  modified: 1753925498240
+  description: ""
+collection:
+  - name: SCCON Test
+    meta:
+      id: fld_6065cdda6e3047648d29602ae8ed96bd
+      created: 1753925545138
+      modified: 1753925545138
+      sortKey: -1753925545138
+      description: ""
+    children:
+      - url: localhost:8080/person
+        name: Get List All Person
+        meta:
+          id: req_e70b65c9e7cf4d73834e2ba8d6eb76a9
+          created: 1753925518688
+          modified: 1753926431871
+          isPrivate: false
+          description: ""
+          sortKey: -1753925549584
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/11.4.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:8080/person
+        name: Create new Person
+        meta:
+          id: req_04e8d171bc7f4e35a08943ecce40abe6
+          created: 1753925586319
+          modified: 1753937307070
+          isPrivate: false
+          description: ""
+          sortKey: -1753925586319
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            		"name": "asdfaaaaaasd",
+            		"birthDate": "1996-01-14",
+            		"admissionaaDate": "2025-07-31",
+            		"salary": 3000.00
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.4.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:8080/person/1
+        name: delete person
+        meta:
+          id: req_cfe434da71c74eccb525a98373209634
+          created: 1753926280584
+          modified: 1753926301700
+          isPrivate: false
+          description: ""
+          sortKey: -1753925586419
+        method: DELETE
+        headers:
+          - name: User-Agent
+            value: insomnia/11.4.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:8080/person/3
+        name: update person
+        meta:
+          id: req_aca81a29286a419097d49eb3d7314bd1
+          created: 1753926360246
+          modified: 1753938052407
+          isPrivate: false
+          description: ""
+          sortKey: -1753925567951.5
+        method: PUT
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            		"name": "asdfaaaaaaaaaaasd",
+            		"birthDate": "1996-01-14",
+            		"emissionDate": "2025-07-31",
+            		"salary": 3000.00
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.4.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:8080/person/4
+        name: patch person
+        meta:
+          id: req_9e649b8b69fa4cc8935ae1835841c663
+          created: 1753926414792
+          modified: 1753936896475
+          isPrivate: false
+          description: ""
+          sortKey: -1753925558767.75
+        method: PATCH
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            		"name": "asdfaaaaaaaasdfasdfasdaaaaaaaaasd",
+            		"birthDate": "1996-01-14",
+            		"emissionDate": "2025-07-31",
+            		"salary": 3000.00
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.4.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: localhost:8080/person/1/age?output=days
+        name: Get age
+        meta:
+          id: req_d6584542106d40e4b153e21ec86ce413
+          created: 1753934570113
+          modified: 1753938199469
+          isPrivate: false
+          description: ""
+          sortKey: -1753925549534
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/11.4.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: localhost:8080/person/1/salary?output=min
+        name: Get salary
+        meta:
+          id: req_3669a8b5ea59455ca6217f4236eec3d6
+          created: 1753936390116
+          modified: 1753938236857
+          isPrivate: false
+          description: ""
+          sortKey: -1753925549484
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/11.4.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: localhost:8080/person/4
+        name: Get person by id
+        meta:
+          id: req_0723ce6ffbb54c3988d9f888090b8285
+          created: 1753938070119
+          modified: 1753938076673
+          isPrivate: false
+          description: ""
+          sortKey: -1753925549559
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/11.4.0
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+cookieJar:
+  name: Default Jar
+  meta:
+    id: jar_99d30891da4bdcebc63947a8fc17f076de878684
+    created: 1753925508954
+    modified: 1753925508954
+environments:
+  name: Base Environment
+  meta:
+    id: env_99d30891da4bdcebc63947a8fc17f076de878684
+    created: 1753925508884
+    modified: 1753925508884
+    isPrivate: false

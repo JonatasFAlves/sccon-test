@@ -4,6 +4,7 @@ import br.com.sccon.geospatial.dto.person.PersonDTO;
 import br.com.sccon.geospatial.service.person.AgeFormatterService;
 import br.com.sccon.geospatial.service.person.PersonService;
 import br.com.sccon.geospatial.service.person.SalaryCalculatorService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -31,8 +32,9 @@ public class PersonController {
     }
 
     @PostMapping()
-    public ResponseEntity<PersonDTO> save(@RequestBody PersonDTO personDTO) {
+    public ResponseEntity<PersonDTO> save(@RequestBody @Valid PersonDTO personDTO) {
         Optional<PersonDTO> optionalPersonDTO = personService.save(personDTO);
+        //todo: better conflict handling
         if(optionalPersonDTO.isEmpty()){
             return ResponseEntity.status(HttpStatus.CONFLICT).build();
         }
@@ -68,9 +70,13 @@ public class PersonController {
     @GetMapping("/{id}")
     public ResponseEntity<PersonDTO> getById(@PathVariable("id") String id){
         Optional<PersonDTO> person = personService.findById(Long.valueOf(id));
+        if(person.isEmpty()){
+            return ResponseEntity.notFound().build();
+        }
         return person.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
+    //todo: add unit and integration tests for this usecase
     @GetMapping("/{id}/age")
     public ResponseEntity<Long> getAgeById(@PathVariable("id") String id, @RequestParam("output") String output){
         Optional<PersonDTO> person = personService.findById(Long.valueOf(id));
@@ -85,6 +91,7 @@ public class PersonController {
         }
     }
 
+    //todo: add unit and integration tests for this usecase
     @GetMapping("/{id}/salary")
     public ResponseEntity<BigDecimal> getSalary(@PathVariable("id") String id, @RequestParam("output") String output){
         Optional<PersonDTO> person = personService.findById(Long.valueOf(id));
