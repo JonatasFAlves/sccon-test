@@ -1,7 +1,9 @@
 package br.com.sccon.geospatial.controller;
 
 import br.com.sccon.geospatial.dto.person.PersonDTO;
-import br.com.sccon.geospatial.service.PersonService;
+import br.com.sccon.geospatial.service.person.AgeFormatterService;
+import br.com.sccon.geospatial.service.person.PersonService;
+import br.com.sccon.geospatial.service.person.SalaryCalculatorService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,9 +16,13 @@ import java.util.Optional;
 @RequestMapping("/person")
 public class PersonController {
     private final PersonService personService;
+    private final AgeFormatterService ageFormatterService;
+    private final SalaryCalculatorService salaryCalculatorService;
 
-    public PersonController(PersonService personService) {
+    public PersonController(PersonService personService, AgeFormatterService ageFormatterService, SalaryCalculatorService salaryCalculatorService) {
         this.personService = personService;
+        this.ageFormatterService = ageFormatterService;
+        this.salaryCalculatorService = salaryCalculatorService;
     }
 
     @GetMapping
@@ -66,35 +72,30 @@ public class PersonController {
     }
 
     @GetMapping("/{id}/age")
-    public ResponseEntity<Long> getAgeById(
-            @PathVariable("id") String id,
-            @RequestParam("output") String output){
+    public ResponseEntity<Long> getAgeById(@PathVariable("id") String id, @RequestParam("output") String output){
         Optional<PersonDTO> person = personService.findById(Long.valueOf(id));
         if(person.isEmpty()){
             return ResponseEntity.notFound().build();
         }
         try {
-            Optional<Long> age = personService.getAge(Long.valueOf(id), output);
+            Optional<Long> age = ageFormatterService.format(person.get().getBirthDate(), output);
             return age.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.badRequest().build());
-        } catch (OutputFormatException e) {
+        } catch (Exception e) {
             return ResponseEntity.badRequest().build();
         }
     }
 
     @GetMapping("/{id}/salary")
-    public ResponseEntity<BigDecimal> getSalary(
-            @PathVariable("id") String id,
-            @RequestParam("output") String output){
+    public ResponseEntity<BigDecimal> getSalary(@PathVariable("id") String id, @RequestParam("output") String output){
         Optional<PersonDTO> person = personService.findById(Long.valueOf(id));
         if (person.isEmpty()) {
             return ResponseEntity.notFound().build();
         }
         try {
-            BigDecimal salary = salaryService.getSalary(output, person.get());
+            BigDecimal salary = salaryCalculatorService.getSalary(person.get().getAdmissionDate(), output);
             return ResponseEntity.ok(salary);
-        } catch (OutputFormatException e) {
+        } catch (Exception e) {
             return ResponseEntity.badRequest().build();
         }
-
     }
 }

@@ -23,9 +23,9 @@ public class BootstrapData implements CommandLineRunner {
 
     public void run(String... args) throws Exception {
         logger.info("Bootstrapping data...");
-        Person person1 = new Person(null, "Jonatas", LocalDate.of(1990, 11, 9), LocalDate.of(2023, 1, 14), new BigDecimal(5200.00));
-        Person person2 = new Person(null, "Carlos", LocalDate.of(1996,1,14), LocalDate.of(2025, 7,31), new BigDecimal(3000.00));
-        Person person3 = new Person(null, "Maria", LocalDate.of(1988, 5, 23), LocalDate.of(2024, 5, 5), new BigDecimal(4500.00));
+        Person person1 = new Person(null, "Jonatas", LocalDate.of(1990, 11, 9), LocalDate.of(2022, 11, 04));
+        Person person2 = new Person(null, "Carlos", LocalDate.of(1996,1,14), LocalDate.of(2025, 7,31));
+        Person person3 = new Person(null, "Maria", LocalDate.of(1988, 5, 23), LocalDate.of(2024, 5, 5));
         personRepository.saveAll(Arrays.asList(person1, person2, person3));
     }
 }

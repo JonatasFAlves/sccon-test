@@ -18,8 +18,7 @@ public class PersonDTOToPersonConverter implements Converter<PersonDTO, Person> 
         person.setId(source.getId());
         person.setName(source.getName());
         person.setBirthDate(source.getBirthDate());
-        person.setEmissionDate(source.getEmissionDate());
-        person.setSalary(source.getSalary());
+        person.setAdmissionDate(source.getAdmissionDate());
         return person;
     }
 }

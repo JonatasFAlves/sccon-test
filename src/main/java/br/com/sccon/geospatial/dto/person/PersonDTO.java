@@ -16,6 +16,5 @@ public class PersonDTO {
     private Long id;
     private String name;
     private LocalDate birthDate;
-    private LocalDate emissionDate;
-    private BigDecimal salary;
+    private LocalDate admissionDate;
 }

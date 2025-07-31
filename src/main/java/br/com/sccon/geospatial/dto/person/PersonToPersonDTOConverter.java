@@ -16,8 +16,7 @@ public class PersonToPersonDTOConverter implements Converter<Person, PersonDTO> 
                 .id(source.getId())
                 .name(source.getName())
                 .birthDate(source.getBirthDate())
-                .emissionDate(source.getEmissionDate())
-                .salary(source.getSalary())
+                .admissionDate(source.getAdmissionDate())
                 .build();
     }
 }

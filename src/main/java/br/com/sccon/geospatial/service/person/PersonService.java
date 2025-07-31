@@ -1,12 +1,10 @@
-package br.com.sccon.geospatial.service;
+package br.com.sccon.geospatial.service.person;
 
 import br.com.sccon.geospatial.dto.person.PersonDTO;
 import br.com.sccon.geospatial.dto.person.PersonDTOToPersonConverter;
 import br.com.sccon.geospatial.dto.person.PersonToPersonDTOConverter;
 import br.com.sccon.geospatial.model.Person;
 import br.com.sccon.geospatial.repository.PersonRepository;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
@@ -77,24 +75,5 @@ public class PersonService {
         return convert(Optional.of(save));
     }
 
-//    public Optional<Long> getAge(Long id, String output) throws Exception {
-//        Optional<PersonDTO> personDTOOptional = findById(id);
-//        if(!StringUtils.hasText(output)){
-//            throw new Exception();
-//        }
-//        if(personDTOOptional.isEmpty()){
-//            return Optional.empty();
-//        }
-//        LocalDate birth = personDTOOptional.get().getBirthDate();
-//        switch (output) {
-//            case "days":
-//                return Optional.of(ageService.getElapsedTimeInDays(birth));
-//            case "months":
-//                return Optional.of(ageService.getElapsedTimeInMonths(birth));
-//            case "years":
-//                return Optional.of(ageService.getElapsedTimeInYears(birth));
-//            default:
-//                throw new Exception();
-//        }
-//    }
+
 }
