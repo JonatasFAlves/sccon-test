@@ -22,7 +22,7 @@ Em seguida:
 
 ### Contatos
 
-Jonatas Alves - alves.jnts@gmail.com
+Jonatas Alves
 
 Link do projeto - https://github.com/JonatasFAlves/sccon-test
 
